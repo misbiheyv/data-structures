@@ -22,7 +22,7 @@ export interface ILinkedList<T> {
 
 export interface IListNode<T> {
 
-	data?: ListNodeData<T>
+	data: ListNodeData<T>
 	next: ListNodePointer<T>
 	prev: ListNodePointer<T>
 

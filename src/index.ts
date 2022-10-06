@@ -11,12 +11,9 @@ list.insertLast(5)
 list.insertLast(5)
 list.insertLast(5)
 
-list.deleteFirst()
-list.deleteFirst()
-list.deleteFirst()
-
-list.deleteAll(5)
-
+// for (const i of list) {
+// 	console.log(i)
+// }
 
 console.log('regular')
 list.showList('regular')

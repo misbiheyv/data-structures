@@ -12,7 +12,7 @@ import {
 import ListNode from './ListNode';
 
 
-export default class LinkedList<T> implements ILinkedList<T> {
+export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
 
 	public get first(): CanUndef<IListNode<T>> {
 		return this.left;
@@ -188,21 +188,14 @@ export default class LinkedList<T> implements ILinkedList<T> {
 
 	public showList(direction: ListDirection = 'regular'): void {
 		if (direction === 'regular') {
-			let cur = this.left;
-	
-			while (cur) {
-				console.log(cur.data);
-				cur = cur.next;
+			for (const el of this) {
+				console.log(el)
 			}
-
 			return ;
 		}
 
-		let cur = this.right;
-	
-		while (cur) {
-			console.log(cur.data);
-			cur = cur.prev;
+		for (const el of this.reverse()) {
+			console.log(el)
 		}
 	}
 
@@ -210,5 +203,70 @@ export default class LinkedList<T> implements ILinkedList<T> {
 		this.left = undefined;
 		this.right = undefined;
 		this.size = 0;
+	}
+
+	public has(value: ListNodeData<T>): boolean {
+		for (const el of this) {
+			if (el !== value) continue ;
+
+			return true;
+		}
+		return false;
+	}
+
+	[Symbol.iterator](): IterableIterator<T> {
+		return this.values();
+	}
+
+	public values(): IterableIterator<T> {
+		let cur = this.left;
+
+		return {
+			[Symbol.iterator]() {
+				return this;
+			},
+			next(): IteratorResult<T> {
+				if (cur === undefined) {
+					return {
+						value: undefined,
+						done: true,
+					}
+				}
+
+				const data = cur.data
+				cur = cur.next;
+
+				return {
+					done: false,
+					value: data
+				}
+			}
+		};
+	}
+
+	public reverse(): IterableIterator<T> {
+		let cur = this.right;
+
+		return {
+			[Symbol.iterator]() {
+				return this;
+			},
+			next(): IteratorResult<T> {
+				if (cur === undefined) {
+					return {
+						value: undefined,
+						done: true,
+					}
+				}
+
+				const data = cur.data
+				cur = cur.prev;
+
+				return {
+					done: false,
+					value: data
+				}
+			}
+		};
 	}
 }
