@@ -2,7 +2,10 @@ import {
 
 	IListNode,
 	ILinkedList,
-	ListNodeData
+	ListNodeData,
+	ListDirection,
+	ListNodePointer,
+	CanUndef
 
 } from './interface';
 
@@ -13,7 +16,7 @@ export default class LinkedList implements ILinkedList {
 	right?: IListNode;
 	size = 0;
 
-	insertFirst(data: number): void {
+	insertFirst(data: ListNodeData): void {
 		if (this.left === undefined) {
 			this.left = new ListNode(data);
 			this.right = this.left;
@@ -25,7 +28,7 @@ export default class LinkedList implements ILinkedList {
 		this.size++;
 	}
 
-	insertLast(data: number): void {
+	insertLast(data: ListNodeData): void {
 		if (this.right === undefined) {
 			this.right = new ListNode(data);
 			this.left = this.right;
@@ -37,10 +40,10 @@ export default class LinkedList implements ILinkedList {
 		this.size++;
 	}
 
-	deleteFirst(): ListNodeData {
-		if (this.size <= 0 || !this.left) throw new Error('List is empty.');
+	deleteFirst(): CanUndef<ListNodeData> {
+		if (this.size <= 0 || this.left === undefined) throw new Error('List is empty.');
 		
-		let res = undefined;
+		let res;
 
 		if (this.size === 1) {
 			res = this.left.data;
@@ -58,10 +61,10 @@ export default class LinkedList implements ILinkedList {
 		return res;
 	}
 
-	deleteLast(): ListNodeData {
-		if (this.size <= 0 || !this.right) throw new Error('List is empty.');
+	deleteLast(): CanUndef<ListNodeData> {
+		if (this.size <= 0 || this.right === undefined) throw new Error('List is empty.');
 		
-		let res = undefined;
+		let res;
 
 		if (this.size === 1) {
 			res = this.right.data;
@@ -79,15 +82,93 @@ export default class LinkedList implements ILinkedList {
 		return res;
 	}
 
-	insertAfter(key: number, data: number): boolean {
-		throw new Error("Method not implemented.");
+	insertAfter(key: ListNodeData, data: ListNodeData): boolean {
+		if (this.size <= 0 || this.left === undefined || this.right === undefined) 
+			throw new Error('List is empty.');
+
+		if (this.right.data === key) {
+			this.insertLast(data);
+			return true;
+		}
+
+		let cur: ListNodePointer = this.left;
+
+		while (cur) {
+			if (cur.data !== key) {
+				cur = cur.next;
+				continue ;
+			}
+
+			cur.next = new ListNode(data, cur, cur.next);
+			cur.next.next!.prev = cur.next;
+			this.size++;
+
+			return true;
+		}
+
+		return false;
 	}
 
-	delete(value: number): ListNodeData {
-		throw new Error("Method not implemented.");
+	delete(value: ListNodeData): CanUndef<ListNodeData> {
+		if (this.size <= 0 || this.left === undefined || this.right === undefined) 
+			throw new Error('List is empty.');
+
+		if (this.left.data === value) return this.deleteFirst();
+
+		if (this.right.data === value) return this.deleteLast();
+
+		let cur = this.left.next
+
+		while (cur) {
+			if (cur.data !== value) {
+				cur = cur.next
+				continue ;
+			}
+
+			const res = cur;
+
+			cur.prev!.next = cur.next
+			cur.next!.prev = cur.prev
+			this.size--;
+
+			return res.data;
+		}
 	}
 
-	showList(direction: 'regular' | 'inverted' = 'regular'): void {
+	deleteAll(value: ListNodeData): boolean {
+		if (this.size <= 0 || this.left === undefined || this.right === undefined) 
+			throw new Error('List is empty.');
+
+		let 
+			deleteSomeone: boolean = false,
+			cur: ListNodePointer = this.left
+
+		while (cur) {
+			if (cur.data !== value) {
+				cur = cur.next
+				continue ;
+			}
+
+			if (cur.next === undefined) {
+				this.deleteLast()
+
+			} else if (cur.prev === undefined) {
+				this.deleteFirst()
+
+			} else {
+				cur.prev.next = cur.next
+				cur.next.prev = cur.prev
+				this.size--;
+			}
+
+			cur = cur.next;
+			deleteSomeone = true;
+		}
+
+		return deleteSomeone;
+	}
+
+	showList(direction: ListDirection = 'regular'): void {
 		if (direction === 'regular') {
 			let cur = this.left;
 	

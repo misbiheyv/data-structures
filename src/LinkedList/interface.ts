@@ -5,13 +5,13 @@ export interface ILinkedList {
 	insertFirst(data: number): void;
 	insertLast(data: ListNodeData): void;
 	
-	deleteFirst(): ListNodeData;
-	deleteLast(): ListNodeData;
+	deleteFirst(): CanUndef<ListNodeData>;
+	deleteLast(): CanUndef<ListNodeData>;
 	
 	insertAfter(key: ListNodeData, data: ListNodeData): boolean;
-	delete(value: ListNodeData): ListNodeData;
+	delete(value: ListNodeData): CanUndef<ListNodeData>;
 
-	showList(): void;
+	showList(direction: ListDirection): void;
 }
 
 export interface IListNode {
@@ -21,6 +21,11 @@ export interface IListNode {
 }
 
 
-export type ListNodePointer = IListNode | undefined
+export type ListNodePointer = CanUndef<IListNode>;
 
-export type ListNodeData = number | undefined
+export type ListNodeData = number
+
+export type ListDirection = 'regular' | 'inverted'
+
+
+export type CanUndef<T> = T | undefined;
