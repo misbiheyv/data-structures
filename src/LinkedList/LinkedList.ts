@@ -11,12 +11,30 @@ import {
 
 import ListNode from './ListNode';
 
-export default class LinkedList implements ILinkedList {
-	left?: IListNode;
-	right?: IListNode;
-	size = 0;
 
-	insertFirst(data: ListNodeData): void {
+export default class LinkedList<T> implements ILinkedList<T> {
+
+	public get first(): CanUndef<IListNode<T>> {
+		return this.left;
+	}
+
+	public get last(): CanUndef<IListNode<T>> {
+		return this.right;
+	}
+
+	public get length(): number {
+		return this.size;
+	}
+
+
+	protected left?: IListNode<T>;
+
+	protected right?: IListNode<T>;
+
+	protected size = 0;
+	
+
+	public insertFirst(data: ListNodeData<T>): void {
 		if (this.left === undefined) {
 			this.left = new ListNode(data);
 			this.right = this.left;
@@ -28,7 +46,7 @@ export default class LinkedList implements ILinkedList {
 		this.size++;
 	}
 
-	insertLast(data: ListNodeData): void {
+	public insertLast(data: ListNodeData<T>): void {
 		if (this.right === undefined) {
 			this.right = new ListNode(data);
 			this.left = this.right;
@@ -40,7 +58,7 @@ export default class LinkedList implements ILinkedList {
 		this.size++;
 	}
 
-	deleteFirst(): CanUndef<ListNodeData> {
+	public deleteFirst(): CanUndef<ListNodeData<T>> {
 		if (this.size <= 0 || this.left === undefined) throw new Error('List is empty.');
 		
 		let res;
@@ -61,7 +79,7 @@ export default class LinkedList implements ILinkedList {
 		return res;
 	}
 
-	deleteLast(): CanUndef<ListNodeData> {
+	public deleteLast(): CanUndef<ListNodeData<T>> {
 		if (this.size <= 0 || this.right === undefined) throw new Error('List is empty.');
 		
 		let res;
@@ -82,7 +100,7 @@ export default class LinkedList implements ILinkedList {
 		return res;
 	}
 
-	insertAfter(key: ListNodeData, data: ListNodeData): boolean {
+	public insertAfter(key: ListNodeData<T>, data: ListNodeData<T>): boolean {
 		if (this.size <= 0 || this.left === undefined || this.right === undefined) 
 			throw new Error('List is empty.');
 
@@ -91,7 +109,7 @@ export default class LinkedList implements ILinkedList {
 			return true;
 		}
 
-		let cur: ListNodePointer = this.left;
+		let cur: ListNodePointer<T> = this.left;
 
 		while (cur) {
 			if (cur.data !== key) {
@@ -109,7 +127,7 @@ export default class LinkedList implements ILinkedList {
 		return false;
 	}
 
-	delete(value: ListNodeData): CanUndef<ListNodeData> {
+	public delete(value: ListNodeData<T>): CanUndef<ListNodeData<T>> {
 		if (this.size <= 0 || this.left === undefined || this.right === undefined) 
 			throw new Error('List is empty.');
 
@@ -135,13 +153,13 @@ export default class LinkedList implements ILinkedList {
 		}
 	}
 
-	deleteAll(value: ListNodeData): boolean {
+	public deleteAll(value: ListNodeData<T>): boolean {
 		if (this.size <= 0 || this.left === undefined || this.right === undefined) 
 			throw new Error('List is empty.');
 
 		let 
 			deleteSomeone: boolean = false,
-			cur: ListNodePointer = this.left
+			cur: ListNodePointer<T> = this.left
 
 		while (cur) {
 			if (cur.data !== value) {
@@ -168,7 +186,7 @@ export default class LinkedList implements ILinkedList {
 		return deleteSomeone;
 	}
 
-	showList(direction: ListDirection = 'regular'): void {
+	public showList(direction: ListDirection = 'regular'): void {
 		if (direction === 'regular') {
 			let cur = this.left;
 	
@@ -186,5 +204,11 @@ export default class LinkedList implements ILinkedList {
 			console.log(cur.data);
 			cur = cur.prev;
 		}
+	}
+
+	public clear(): void {
+		this.left = undefined;
+		this.right = undefined;
+		this.size = 0;
 	}
 }

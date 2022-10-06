@@ -1,29 +1,39 @@
-export interface ILinkedList {
-	left?: IListNode;
-	right?: IListNode;
+export interface ILinkedList<T> {
 
-	insertFirst(data: number): void;
-	insertLast(data: ListNodeData): void;
+	first: CanUndef<IListNode<T>>;
+	last: CanUndef<IListNode<T>>;
+	length: number;
+
+	insertFirst(data: ListNodeData<T>): void;
+	insertLast(data: ListNodeData<T>): void;
 	
-	deleteFirst(): CanUndef<ListNodeData>;
-	deleteLast(): CanUndef<ListNodeData>;
+	deleteFirst(): CanUndef<ListNodeData<T>>;
+	deleteLast(): CanUndef<ListNodeData<T>>;
 	
-	insertAfter(key: ListNodeData, data: ListNodeData): boolean;
-	delete(value: ListNodeData): CanUndef<ListNodeData>;
+	insertAfter(key: ListNodeData<T>, data: ListNodeData<T>): boolean;
+	delete(value: ListNodeData<T>): CanUndef<ListNodeData<T>>;
+
+	clear(): void;
 
 	showList(direction: ListDirection): void;
-}
 
-export interface IListNode {
-	data?: ListNodeData
-	next: ListNodePointer
-	prev: ListNodePointer
 }
 
 
-export type ListNodePointer = CanUndef<IListNode>;
+export interface IListNode<T> {
 
-export type ListNodeData = number
+	data?: ListNodeData<T>
+	next: ListNodePointer<T>
+	prev: ListNodePointer<T>
+
+}
+
+
+export type ListNodePointer<T> = CanUndef<IListNode<T>>;
+
+
+export type ListNodeData<T> = T
+
 
 export type ListDirection = 'regular' | 'inverted'
 
