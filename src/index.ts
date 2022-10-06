@@ -1,19 +1,6 @@
 import LinkedList from "./LinkedList/LinkedList";
 
-const list = new LinkedList<number>()
-
-list.insertLast(1)
-list.insertLast(2)
-list.insertLast(3)
-list.insertLast(4)
-list.insertLast(5)
-list.insertLast(5)
-list.insertLast(5)
-list.insertLast(5)
-
-// for (const i of list) {
-// 	console.log(i)
-// }
+const list = new LinkedList<number>([1,2,3,4,5,6,7])
 
 console.log('regular')
 list.showList('regular')

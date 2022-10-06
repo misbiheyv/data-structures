@@ -32,7 +32,16 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
 	protected right?: IListNode<T>;
 
 	protected size = 0;
-	
+
+
+	constructor(iterable?: Iterable<T>) {
+		if (iterable) {
+			for (const el of iterable) {
+				this.insertLast(el);
+			}
+		}
+	}
+
 
 	public insertFirst(data: ListNodeData<T>): void {
 		if (this.left === undefined) {
