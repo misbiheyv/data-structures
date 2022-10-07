@@ -5,27 +5,30 @@ export default class Structure<T> {
     private store: Array<T>;
 
     constructor(keys: Array<string>) {
-        this.store = new Array(keys.length);
 
-        let functionBody = `switch (key) {`
+        this.store = new Array(keys.length);
+        this.getIndexFunction = this.generateFunction(keys);
+    }
+
+
+    public set(key: string, value: T): void {
+        this.store[this.getIndexFunction(key)] = value;
+    }
+
+    public get(key: string): T {
+        return this.store[this.getIndexFunction(key)];
+    }
+
+
+    private generateFunction(keys: Array<string>): Function {
+        let functionBody = `switch (key) {`;
 
         for (let i = 0; i < keys.length; i++) {
-            const key = keys[i]
-            functionBody += `case '${key}': { return ${i} }`
+            functionBody += `case '${keys[i]}': { return ${i} }`;
         }
 
-        functionBody += `default: break;}`
+        functionBody += `default: break;}`;
 
-        this.getIndexFunction = (key: string) => {
-            return new Function('key', functionBody)(key)
-        }
-    }
-
-    public set(key: string, value: T) {
-        this.store[this.getIndexFunction(key)] = value
-    }
-
-    public get(key: string) {
-        return this.store[this.getIndexFunction(key)]
+        return (key: string) => new Function('key', functionBody)(key);
     }
 }
