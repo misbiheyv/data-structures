@@ -118,19 +118,15 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
             return true;
         }
 
-        let cur: ListNodePointer<T> = this.left;
+        for (const cur of this.unsafeItems()) {
+            if (cur.data === key) {
 
-        while (cur) {
-            if (cur.data !== key) {
-                cur = cur.next;
-                continue;
+                cur.next = new ListNode(data, cur, cur.next);
+                cur.next.next!.prev = cur.next;
+                this.size++;
+
+                return true;
             }
-
-            cur.next = new ListNode(data, cur, cur.next);
-            cur.next.next!.prev = cur.next;
-            this.size++;
-
-            return true;
         }
 
         return false;
@@ -144,21 +140,16 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
 
         if (this.right.data === value) return this.deleteLast();
 
-        let cur = this.left.next
-
-        while (cur) {
-            if (cur.data !== value) {
-                cur = cur.next
-                continue;
+        for (const cur of this.unsafeItems()) {
+            if (cur.data === value) {
+                const res = cur.data;
+    
+                cur.prev!.next = cur.next
+                cur.next!.prev = cur.prev
+                this.size--;
+    
+                return res;
             }
-
-            const res = cur;
-
-            cur.prev!.next = cur.next
-            cur.next!.prev = cur.prev
-            this.size--;
-
-            return res.data;
         }
     }
 
@@ -166,15 +157,10 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         if (this.size <= 0 || this.left === undefined || this.right === undefined)
             throw new Error('List is empty.');
 
-        let
-            deleteSomeone: boolean = false,
-            cur: ListNodePointer<T> = this.left
+        let deleteSomeone: boolean = false;
 
-        while (cur) {
-            if (cur.data !== value) {
-                cur = cur.next
-                continue;
-            }
+        for (const cur of this.unsafeItems()) {
+            if (cur.data !== value) continue;
 
             if (cur.next === undefined) {
                 this.deleteLast()
@@ -188,7 +174,6 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
                 this.size--;
             }
 
-            cur = cur.next;
             deleteSomeone = true;
         }
 
@@ -260,6 +245,15 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         while (cur) {
             yield cur.data;
             cur = cur.prev;
+        }
+    }
+
+    private *unsafeItems(reversed?: false): IterableIterator<ListNode<T>> {
+        let cur = reversed ? this.right : this.left;
+
+        while (cur) {
+            yield cur;
+            cur = reversed ? cur.prev : cur.next;
         }
     }
 }
