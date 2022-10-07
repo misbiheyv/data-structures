@@ -4,14 +4,14 @@ export interface ILinkedList<T> {
     last: CanUndef<IListNode<T>>;
     length: number;
 
-    insertFirst(data: ListNodeData<T>): void;
-    insertLast(data: ListNodeData<T>): void;
+    insertFirst(data: T): void;
+    insertLast(data: T): void;
 
-    deleteFirst(): CanUndef<ListNodeData<T>>;
-    deleteLast(): CanUndef<ListNodeData<T>>;
+    deleteFirst(): CanUndef<T>;
+    deleteLast(): CanUndef<T>;
 
-    insertAfter(key: ListNodeData<T>, data: ListNodeData<T>): boolean;
-    delete(value: ListNodeData<T>): CanUndef<ListNodeData<T>>;
+    insertAfter(key: T, data: T): boolean;
+    delete(value: T): CanUndef<T>;
 
     clear(): void;
 
@@ -22,17 +22,20 @@ export interface ILinkedList<T> {
 
 export interface IListNode<T> {
 
-    data: ListNodeData<T>
+    data: T
     next: ListNodePointer<T>
     prev: ListNodePointer<T>
 
 }
 
 
+export interface ListNodeView<T> {
+    readonly data: T
+    readonly next: ListNodePointer<T>
+    readonly prev: ListNodePointer<T>
+}
+
 export type ListNodePointer<T> = CanUndef<IListNode<T>>;
-
-
-export type ListNodeData<T> = T
 
 
 export type ListDirection = 'regular' | 'inverted'

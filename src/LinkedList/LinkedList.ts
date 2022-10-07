@@ -2,9 +2,9 @@ import {
 
     IListNode,
     ILinkedList,
-    ListNodeData,
     ListDirection,
     ListNodePointer,
+    ListNodeView,
     CanUndef
 
 } from './interface';
@@ -43,7 +43,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
     }
 
 
-    public insertFirst(data: ListNodeData<T>): void {
+    public insertFirst(data: T): void {
         if (this.left === undefined) {
             this.left = new ListNode(data);
             this.right = this.left;
@@ -55,7 +55,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         this.size++;
     }
 
-    public insertLast(data: ListNodeData<T>): void {
+    public insertLast(data: T): void {
         if (this.right === undefined) {
             this.right = new ListNode(data);
             this.left = this.right;
@@ -67,7 +67,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         this.size++;
     }
 
-    public deleteFirst(): CanUndef<ListNodeData<T>> {
+    public deleteFirst(): CanUndef<T> {
         if (this.size <= 0 || this.left === undefined) throw new Error('List is empty.');
 
         let res;
@@ -88,7 +88,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         return res;
     }
 
-    public deleteLast(): CanUndef<ListNodeData<T>> {
+    public deleteLast(): CanUndef<T> {
         if (this.size <= 0 || this.right === undefined) throw new Error('List is empty.');
 
         let res;
@@ -109,7 +109,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         return res;
     }
 
-    public insertAfter(key: ListNodeData<T>, data: ListNodeData<T>): boolean {
+    public insertAfter(key: T, data: T): boolean {
         if (this.size <= 0 || this.left === undefined || this.right === undefined)
             throw new Error('List is empty.');
 
@@ -136,7 +136,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         return false;
     }
 
-    public delete(value: ListNodeData<T>): CanUndef<ListNodeData<T>> {
+    public delete(value: T): CanUndef<T> {
         if (this.size <= 0 || this.left === undefined || this.right === undefined)
             throw new Error('List is empty.');
 
@@ -162,7 +162,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         }
     }
 
-    public deleteAll(value: ListNodeData<T>): boolean {
+    public deleteAll(value: T): boolean {
         if (this.size <= 0 || this.left === undefined || this.right === undefined)
             throw new Error('List is empty.');
 
@@ -203,7 +203,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
             return;
         }
 
-        for (const el of this.reverse()) {
+        for (const el of this.valuesReverse()) {
             console.log(el)
         }
     }
@@ -214,7 +214,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         this.size = 0;
     }
 
-    public has(value: ListNodeData<T>): boolean {
+    public has(value: T): boolean {
         for (const el of this) {
             if (el !== value) continue;
 
@@ -225,6 +225,60 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
 
     [Symbol.iterator](): IterableIterator<T> {
         return this.values();
+    }
+
+    public items(): IterableIterator<ListNodeView<T>> {
+        let cur = this.left;
+
+        return {
+            [Symbol.iterator]() {
+                return this;
+            },
+            next(): IteratorResult<ListNodeView<T>> {
+                if (cur === undefined) {
+                    return {
+                        value: undefined,
+                        done: true,
+                    }
+                }
+
+                const data = cur;
+
+                cur = cur.next;
+
+                return {
+                    done: false,
+                    value: data
+                }
+            }
+        };
+    }
+
+    public itemsReverse(): IterableIterator<ListNodeView<T>> {
+        let cur = this.right;
+
+        return {
+            [Symbol.iterator]() {
+                return this;
+            },
+            next(): IteratorResult<ListNodeView<T>> {
+                if (cur === undefined) {
+                    return {
+                        value: undefined,
+                        done: true,
+                    }
+                }
+
+                const data = cur;
+
+                cur = cur.prev;
+
+                return {
+                    done: false,
+                    value: data
+                }
+            }
+        };
     }
 
     public values(): IterableIterator<T> {
@@ -253,7 +307,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         };
     }
 
-    public reverse(): IterableIterator<T> {
+    public valuesReverse(): IterableIterator<T> {
         let cur = this.right;
 
         return {
