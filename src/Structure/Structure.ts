@@ -1,22 +1,22 @@
 export default class Structure<T> {
 
-    private getIndexFunction: Function;
+    private getIndex: Function;
 
     private store: Array<T>;
 
     constructor(keys: Array<string>) {
 
         this.store = new Array(keys.length);
-        this.getIndexFunction = this.generateFunction(keys);
+        this.getIndex = this.generateFunction(keys);
     }
 
 
     public set(key: string, value: T): void {
-        this.store[this.getIndexFunction(key)] = value;
+        this.store[this.getIndex(key)] = value;
     }
 
     public get(key: string): T {
-        return this.store[this.getIndexFunction(key)];
+        return this.store[this.getIndex(key)];
     }
 
 
