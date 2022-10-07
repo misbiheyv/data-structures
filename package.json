@@ -1,0 +1,10 @@
+{
+	"type": "module",
+	"dependencies": {
+		"typescript": "^4.7.4"
+	},
+	"scripts": {
+		"build": "tsc",
+		"serve": "tsc && cd dist && node --es-module-specifier-resolution=node index.js"
+	}
+}
