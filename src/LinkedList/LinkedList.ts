@@ -1,11 +1,11 @@
 import {
 
-	IListNode,
-	ILinkedList,
-	ListNodeData,
-	ListDirection,
-	ListNodePointer,
-	CanUndef
+    IListNode,
+    ILinkedList,
+    ListNodeData,
+    ListDirection,
+    ListNodePointer,
+    CanUndef
 
 } from './interface';
 
@@ -14,268 +14,268 @@ import ListNode from './ListNode';
 
 export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
 
-	public get first(): CanUndef<IListNode<T>> {
-		return this.left;
-	}
+    public get first(): CanUndef<IListNode<T>> {
+        return this.left;
+    }
 
-	public get last(): CanUndef<IListNode<T>> {
-		return this.right;
-	}
+    public get last(): CanUndef<IListNode<T>> {
+        return this.right;
+    }
 
-	public get length(): number {
-		return this.size;
-	}
-
-
-	protected left?: IListNode<T>;
-
-	protected right?: IListNode<T>;
-
-	protected size = 0;
+    public get length(): number {
+        return this.size;
+    }
 
 
-	constructor(iterable?: Iterable<T>) {
-		if (iterable) {
-			for (const el of iterable) {
-				this.insertLast(el);
-			}
-		}
-	}
+    protected left?: IListNode<T>;
+
+    protected right?: IListNode<T>;
+
+    protected size = 0;
 
 
-	public insertFirst(data: ListNodeData<T>): void {
-		if (this.left === undefined) {
-			this.left = new ListNode(data);
-			this.right = this.left;
-		} else {
-			this.left.prev = new ListNode(data, undefined, this.left);
-			this.left = this.left.prev;
-		}
+    constructor(iterable?: Iterable<T>) {
+        if (iterable) {
+            for (const el of iterable) {
+                this.insertLast(el);
+            }
+        }
+    }
 
-		this.size++;
-	}
 
-	public insertLast(data: ListNodeData<T>): void {
-		if (this.right === undefined) {
-			this.right = new ListNode(data);
-			this.left = this.right;
-		} else {
-			this.right.next = new ListNode(data, this.right);
-			this.right = this.right.next;
-		}
+    public insertFirst(data: ListNodeData<T>): void {
+        if (this.left === undefined) {
+            this.left = new ListNode(data);
+            this.right = this.left;
+        } else {
+            this.left.prev = new ListNode(data, undefined, this.left);
+            this.left = this.left.prev;
+        }
 
-		this.size++;
-	}
+        this.size++;
+    }
 
-	public deleteFirst(): CanUndef<ListNodeData<T>> {
-		if (this.size <= 0 || this.left === undefined) throw new Error('List is empty.');
-		
-		let res;
+    public insertLast(data: ListNodeData<T>): void {
+        if (this.right === undefined) {
+            this.right = new ListNode(data);
+            this.left = this.right;
+        } else {
+            this.right.next = new ListNode(data, this.right);
+            this.right = this.right.next;
+        }
 
-		if (this.size === 1) {
-			res = this.left.data;
+        this.size++;
+    }
 
-			this.left = undefined;
-			this.right = undefined;
-		} else {
-			res = this.left.data;
-			this.left = this.left.next;
-			this.left!.prev = undefined;
-		}
+    public deleteFirst(): CanUndef<ListNodeData<T>> {
+        if (this.size <= 0 || this.left === undefined) throw new Error('List is empty.');
 
-		this.size--;
+        let res;
 
-		return res;
-	}
+        if (this.size === 1) {
+            res = this.left.data;
 
-	public deleteLast(): CanUndef<ListNodeData<T>> {
-		if (this.size <= 0 || this.right === undefined) throw new Error('List is empty.');
-		
-		let res;
+            this.left = undefined;
+            this.right = undefined;
+        } else {
+            res = this.left.data;
+            this.left = this.left.next;
+            this.left!.prev = undefined;
+        }
 
-		if (this.size === 1) {
-			res = this.right.data;
+        this.size--;
 
-			this.right = undefined;
-			this.left = undefined;
-		} else {
-			res = this.right.data;
-			this.right = this.right.prev;
-			this.right!.next = undefined;
-		}
+        return res;
+    }
 
-		this.size--;
+    public deleteLast(): CanUndef<ListNodeData<T>> {
+        if (this.size <= 0 || this.right === undefined) throw new Error('List is empty.');
 
-		return res;
-	}
+        let res;
 
-	public insertAfter(key: ListNodeData<T>, data: ListNodeData<T>): boolean {
-		if (this.size <= 0 || this.left === undefined || this.right === undefined) 
-			throw new Error('List is empty.');
+        if (this.size === 1) {
+            res = this.right.data;
 
-		if (this.right.data === key) {
-			this.insertLast(data);
-			return true;
-		}
+            this.right = undefined;
+            this.left = undefined;
+        } else {
+            res = this.right.data;
+            this.right = this.right.prev;
+            this.right!.next = undefined;
+        }
 
-		let cur: ListNodePointer<T> = this.left;
+        this.size--;
 
-		while (cur) {
-			if (cur.data !== key) {
-				cur = cur.next;
-				continue ;
-			}
+        return res;
+    }
 
-			cur.next = new ListNode(data, cur, cur.next);
-			cur.next.next!.prev = cur.next;
-			this.size++;
+    public insertAfter(key: ListNodeData<T>, data: ListNodeData<T>): boolean {
+        if (this.size <= 0 || this.left === undefined || this.right === undefined)
+            throw new Error('List is empty.');
 
-			return true;
-		}
+        if (this.right.data === key) {
+            this.insertLast(data);
+            return true;
+        }
 
-		return false;
-	}
+        let cur: ListNodePointer<T> = this.left;
 
-	public delete(value: ListNodeData<T>): CanUndef<ListNodeData<T>> {
-		if (this.size <= 0 || this.left === undefined || this.right === undefined) 
-			throw new Error('List is empty.');
+        while (cur) {
+            if (cur.data !== key) {
+                cur = cur.next;
+                continue;
+            }
 
-		if (this.left.data === value) return this.deleteFirst();
+            cur.next = new ListNode(data, cur, cur.next);
+            cur.next.next!.prev = cur.next;
+            this.size++;
 
-		if (this.right.data === value) return this.deleteLast();
+            return true;
+        }
 
-		let cur = this.left.next
+        return false;
+    }
 
-		while (cur) {
-			if (cur.data !== value) {
-				cur = cur.next
-				continue ;
-			}
+    public delete(value: ListNodeData<T>): CanUndef<ListNodeData<T>> {
+        if (this.size <= 0 || this.left === undefined || this.right === undefined)
+            throw new Error('List is empty.');
 
-			const res = cur;
+        if (this.left.data === value) return this.deleteFirst();
 
-			cur.prev!.next = cur.next
-			cur.next!.prev = cur.prev
-			this.size--;
+        if (this.right.data === value) return this.deleteLast();
 
-			return res.data;
-		}
-	}
+        let cur = this.left.next
 
-	public deleteAll(value: ListNodeData<T>): boolean {
-		if (this.size <= 0 || this.left === undefined || this.right === undefined) 
-			throw new Error('List is empty.');
+        while (cur) {
+            if (cur.data !== value) {
+                cur = cur.next
+                continue;
+            }
 
-		let 
-			deleteSomeone: boolean = false,
-			cur: ListNodePointer<T> = this.left
+            const res = cur;
 
-		while (cur) {
-			if (cur.data !== value) {
-				cur = cur.next
-				continue ;
-			}
+            cur.prev!.next = cur.next
+            cur.next!.prev = cur.prev
+            this.size--;
 
-			if (cur.next === undefined) {
-				this.deleteLast()
+            return res.data;
+        }
+    }
 
-			} else if (cur.prev === undefined) {
-				this.deleteFirst()
+    public deleteAll(value: ListNodeData<T>): boolean {
+        if (this.size <= 0 || this.left === undefined || this.right === undefined)
+            throw new Error('List is empty.');
 
-			} else {
-				cur.prev.next = cur.next
-				cur.next.prev = cur.prev
-				this.size--;
-			}
+        let
+            deleteSomeone: boolean = false,
+            cur: ListNodePointer<T> = this.left
 
-			cur = cur.next;
-			deleteSomeone = true;
-		}
+        while (cur) {
+            if (cur.data !== value) {
+                cur = cur.next
+                continue;
+            }
 
-		return deleteSomeone;
-	}
+            if (cur.next === undefined) {
+                this.deleteLast()
 
-	public showList(direction: ListDirection = 'regular'): void {
-		if (direction === 'regular') {
-			for (const el of this) {
-				console.log(el)
-			}
-			return ;
-		}
+            } else if (cur.prev === undefined) {
+                this.deleteFirst()
 
-		for (const el of this.reverse()) {
-			console.log(el)
-		}
-	}
+            } else {
+                cur.prev.next = cur.next
+                cur.next.prev = cur.prev
+                this.size--;
+            }
 
-	public clear(): void {
-		this.left = undefined;
-		this.right = undefined;
-		this.size = 0;
-	}
+            cur = cur.next;
+            deleteSomeone = true;
+        }
 
-	public has(value: ListNodeData<T>): boolean {
-		for (const el of this) {
-			if (el !== value) continue ;
+        return deleteSomeone;
+    }
 
-			return true;
-		}
-		return false;
-	}
+    public showList(direction: ListDirection = 'regular'): void {
+        if (direction === 'regular') {
+            for (const el of this) {
+                console.log(el)
+            }
+            return;
+        }
 
-	[Symbol.iterator](): IterableIterator<T> {
-		return this.values();
-	}
+        for (const el of this.reverse()) {
+            console.log(el)
+        }
+    }
 
-	public values(): IterableIterator<T> {
-		let cur = this.left;
+    public clear(): void {
+        this.left = undefined;
+        this.right = undefined;
+        this.size = 0;
+    }
 
-		return {
-			[Symbol.iterator]() {
-				return this;
-			},
-			next(): IteratorResult<T> {
-				if (cur === undefined) {
-					return {
-						value: undefined,
-						done: true,
-					}
-				}
+    public has(value: ListNodeData<T>): boolean {
+        for (const el of this) {
+            if (el !== value) continue;
 
-				const data = cur.data
-				cur = cur.next;
+            return true;
+        }
+        return false;
+    }
 
-				return {
-					done: false,
-					value: data
-				}
-			}
-		};
-	}
+    [Symbol.iterator](): IterableIterator<T> {
+        return this.values();
+    }
 
-	public reverse(): IterableIterator<T> {
-		let cur = this.right;
+    public values(): IterableIterator<T> {
+        let cur = this.left;
 
-		return {
-			[Symbol.iterator]() {
-				return this;
-			},
-			next(): IteratorResult<T> {
-				if (cur === undefined) {
-					return {
-						value: undefined,
-						done: true,
-					}
-				}
+        return {
+            [Symbol.iterator]() {
+                return this;
+            },
+            next(): IteratorResult<T> {
+                if (cur === undefined) {
+                    return {
+                        value: undefined,
+                        done: true,
+                    }
+                }
 
-				const data = cur.data
-				cur = cur.prev;
+                const data = cur.data
+                cur = cur.next;
 
-				return {
-					done: false,
-					value: data
-				}
-			}
-		};
-	}
+                return {
+                    done: false,
+                    value: data
+                }
+            }
+        };
+    }
+
+    public reverse(): IterableIterator<T> {
+        let cur = this.right;
+
+        return {
+            [Symbol.iterator]() {
+                return this;
+            },
+            next(): IteratorResult<T> {
+                if (cur === undefined) {
+                    return {
+                        value: undefined,
+                        done: true,
+                    }
+                }
+
+                const data = cur.data
+                cur = cur.prev;
+
+                return {
+                    done: false,
+                    value: data
+                }
+            }
+        };
+    }
 }
