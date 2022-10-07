@@ -1,13 +1,14 @@
-import {
+import type {
 
     IListNode,
     ILinkedList,
     ListDirection,
     ListNodePointer,
     ListNodeView,
-    CanUndef
 
 } from './interface';
+
+import type { CanUndef } from '../interface';
 
 import ListNode from './ListNode';
 

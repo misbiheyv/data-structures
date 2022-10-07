@@ -1,3 +1,5 @@
+import type { CanUndef } from "../interface";
+
 export interface ILinkedList<T> {
 
     first: CanUndef<IListNode<T>>;
@@ -39,6 +41,3 @@ export type ListNodePointer<T> = CanUndef<IListNode<T>>;
 
 
 export type ListDirection = 'regular' | 'inverted'
-
-
-export type CanUndef<T> = T | undefined;
