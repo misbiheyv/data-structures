@@ -227,109 +227,39 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         return this.values();
     }
 
-    public items(): IterableIterator<ListNodeView<T>> {
+    public *items(): IterableIterator<ListNodeView<T>> {
         let cur = this.left;
 
-        return {
-            [Symbol.iterator]() {
-                return this;
-            },
-            next(): IteratorResult<ListNodeView<T>> {
-                if (cur === undefined) {
-                    return {
-                        value: undefined,
-                        done: true,
-                    }
-                }
-
-                const data = cur;
-
-                cur = cur.next;
-
-                return {
-                    done: false,
-                    value: data
-                }
-            }
-        };
+        while (cur) {
+            yield cur;
+            cur = cur.next;
+        }
     }
 
-    public itemsReverse(): IterableIterator<ListNodeView<T>> {
+    public *itemsReverse(): IterableIterator<ListNodeView<T>> {
         let cur = this.right;
 
-        return {
-            [Symbol.iterator]() {
-                return this;
-            },
-            next(): IteratorResult<ListNodeView<T>> {
-                if (cur === undefined) {
-                    return {
-                        value: undefined,
-                        done: true,
-                    }
-                }
-
-                const data = cur;
-
-                cur = cur.prev;
-
-                return {
-                    done: false,
-                    value: data
-                }
-            }
-        };
+        while (cur) {
+            yield cur;
+            cur = cur.prev;
+        }
     }
 
-    public values(): IterableIterator<T> {
+    public *values(): IterableIterator<T> {
         let cur = this.left;
 
-        return {
-            [Symbol.iterator]() {
-                return this;
-            },
-            next(): IteratorResult<T> {
-                if (cur === undefined) {
-                    return {
-                        value: undefined,
-                        done: true,
-                    }
-                }
-
-                const data = cur.data
-                cur = cur.next;
-
-                return {
-                    done: false,
-                    value: data
-                }
-            }
-        };
+        while (cur) {
+            yield cur.data;
+            cur = cur.next;
+        }
     }
 
-    public valuesReverse(): IterableIterator<T> {
+    public *valuesReverse(): IterableIterator<T> {
         let cur = this.right;
 
-        return {
-            [Symbol.iterator]() {
-                return this;
-            },
-            next(): IteratorResult<T> {
-                if (cur === undefined) {
-                    return {
-                        value: undefined,
-                        done: true,
-                    }
-                }
-
-                const data = cur.data
-                cur = cur.prev;
-
-                return {
-                    done: false,
-                    value: data
-                }
-            }
-        };
+        while (cur) {
+            yield cur.data;
+            cur = cur.prev;
+        }
     }
 }
