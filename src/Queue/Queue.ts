@@ -1,7 +1,8 @@
 import { CanUndef } from "../interface";
 import LinkedList from "../LinkedList/LinkedList"
+import { AbstractQueue } from "./interface";
 
-export default class Queue<T> {
+export default class Queue<T> implements AbstractQueue<T> {
     public get size(): number {
         return this.store.length;
     }
