@@ -54,7 +54,11 @@ export default class Vector<T> implements AbstractDynamicArray<T> {
     delete(index: number): void {
         if (index > this.maxSize) throw new Error('index more than size of Vector.');
 
-        this.store[index] = undefined;
+        for (let i = index; i < this.currentSize - 1; i++) {
+            this.store[i] = this.store[i + 1];
+        }
+
+        this.currentSize--;
     }
 
 
