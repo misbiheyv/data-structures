@@ -1,7 +1,8 @@
 import { CanUndef } from "../interface";
 import LinkedList from "../LinkedList/LinkedList";
+import AbstractDeque from "./interface";
 
-export default class Deque<T> {
+export default class Deque<T> implements AbstractDeque<T> {
     private store = new LinkedList<T>();
 
     public get size(): number {
