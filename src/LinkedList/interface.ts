@@ -14,11 +14,18 @@ export interface ILinkedList<T> {
 
     insertAfter(key: T, data: T): boolean;
     delete(value: T): CanUndef<T>;
+    deleteAll(value: T): void;
 
+    has(data: T): boolean;
     clear(): void;
 
     showList(direction: ListDirection): void;
 
+    [Symbol.iterator](): IterableIterator<T>;
+    items(): IterableIterator<ListNodeView<T>>;
+    itemsReverse(): IterableIterator<ListNodeView<T>>;
+    values(): IterableIterator<T>;
+    valuesReverse(): IterableIterator<T>;
 }
 
 
