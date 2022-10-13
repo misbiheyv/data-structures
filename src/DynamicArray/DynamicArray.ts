@@ -48,8 +48,12 @@ export default class DynamicArray<T> implements AbstractDynamicArray<T> {
     }
 
     public delete(index: number): void {
-        const arrIndex = this.getArrIndex(index);
-        this.getElementByIndex(index)!.data[arrIndex] = undefined;
+        if (index > this.size || index < 0) throw new Error('Index out of bounds.')
+
+        for (let i = 0; i < this.currentLength - index - 1; i++) {
+            this.getElementByIndex(index + i)!.data[this.getArrIndex(index + i)] = this.getElementByIndex(index + i + 1)?.data[this.getArrIndex(index + i + 1)];
+        }
+
         this.currentLength--;
     }
 
@@ -73,7 +77,7 @@ export default class DynamicArray<T> implements AbstractDynamicArray<T> {
 
         for (const el of this.list) {
             for (let i = 0; i < el.length && j < this.currentLength; i++, j++) {
-                yield [i, el[i]]
+                yield [j, el[i]]
             }
         }
     }
