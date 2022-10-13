@@ -1,6 +1,7 @@
 import { CanUndef } from "../interface";
+import { AbstractStack } from './interface'
 
-export default class Stack<T> {
+export default class Stack<T> implements AbstractStack<T> {
     public get maxSize() : number {
         return this._size;
     }
