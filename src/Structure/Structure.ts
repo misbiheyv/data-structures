@@ -1,4 +1,6 @@
-export default class Structure<T> {
+import { AbstractStructure } from "./interface";
+
+export default class Structure<T> implements AbstractStructure<T> {
 
     private getIndex: Function;
 
