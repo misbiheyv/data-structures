@@ -3,7 +3,6 @@ import type {
     IListNode,
     ILinkedList,
     ListDirection,
-    ListNodePointer,
     ListNodeView,
 
 } from './interface';
