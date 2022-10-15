@@ -61,6 +61,21 @@ export default class Vector<T> implements AbstractDynamicArray<T> {
         this.currentSize--;
     }
 
+    fill(target: any): this {
+
+        for (let i = 0; i < this.maxSize; i++) {
+            try {
+                this.store[i] = new target()
+            } catch (error) {
+                this.store[i] = target
+            }
+        }
+
+        this.currentSize = this.maxSize;
+        
+        return this;
+    }
+
 
     [Symbol.iterator](): IterableIterator<CanUndef<T>> {
         return this.values();
