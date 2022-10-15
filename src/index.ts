@@ -6,6 +6,7 @@ import Structure from './Structure/Structure'
 import DynamicArray from "./DynamicArray/DynamicArray";
 import ChainedHashMap from "./HashMap/ChainedHashMap";
 import Vector from "./DynamicArray/Vector";
+import BinaryThreeSet from "./BinaryThreeSet/BinaryThreeSet";
 
 const list = new LinkedList<number[]>()
 const queue = new Queue<number>();
@@ -16,17 +17,18 @@ const dynamicArray = new DynamicArray<number>(3);
 const vector = new Vector(10).fill(10);
 const map = new ChainedHashMap();
 
+const bts = new BinaryThreeSet([2, 1, 5, 3, 6]);
 
+for (const el of bts.inorder()) {
+    console.log(el)
+}
 
-map.set('name', 'Misha')
-map.set('age', '20')
-map.set('sex', 'male')
-map.set('job', 'programmer')
-map.set('etc', 'etc')
+console.log('pre')
+for (const el of bts.preorder()) {
+    console.log(el)
+}
 
-console.log(map)
-
-
-for (const el of map) {
+console.log('post')
+for (const el of bts.postorder()) {
     console.log(el)
 }
