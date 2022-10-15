@@ -7,13 +7,13 @@ describe('ChainedHashMap', () => {
         map.set('name', 'Misha');
         map.set('age', 20);
         map.set('sex', 'male');
-        map.set('work', 'programmer');
+        map.set('job', 'programmer');
         map.set('etc', 'etc');
 
         expect(map.get('name')).toEqual('Misha');
         expect(map.get('age')).toEqual(20);
         expect(map.get('sex')).toEqual('male');
-        expect(map.get('work')).toEqual('programmer');
+        expect(map.get('job')).toEqual('programmer');
         expect(map.get('etc')).toEqual('etc');
 
         expect(map.has('name')).toEqual(true);

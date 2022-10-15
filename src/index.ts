@@ -21,7 +21,7 @@ const map = new ChainedHashMap();
 map.set('name', 'Misha')
 map.set('age', '20')
 map.set('sex', 'male')
-map.set('work', 'programmer')
+map.set('job', 'programmer')
 map.set('etc', 'etc')
 
 console.log(map)
