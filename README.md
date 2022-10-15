@@ -13,3 +13,5 @@
 - ### [Динамический расширяемый массив на основе списка массивов (DynamicArray)](https://github.com/misbiheyv/data-structures/tree/main/src/DynamicArray)
 
 - ### [Вектор (Vector)](https://github.com/misbiheyv/data-structures/tree/main/src/DynamicArray)
+
+- ### [Хэш таблица (HashMap)](https://github.com/misbiheyv/data-structures/tree/main/src/HashMap)
