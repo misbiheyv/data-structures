@@ -15,3 +15,5 @@
 - ### [Вектор (Vector)](https://github.com/misbiheyv/data-structures/tree/main/src/DynamicArray)
 
 - ### [Хэш таблица (HashMap)](https://github.com/misbiheyv/data-structures/tree/main/src/HashMap)
+
+- ### [Сет на основе бинарного дерева (BinaryThreeSet)](https://github.com/misbiheyv/data-structures/tree/main/src/BinaryThreeSet)
