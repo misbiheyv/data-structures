@@ -14,7 +14,7 @@ const stack = new Stack<number>(4);
 const structure = new Structure<string | number>(['name', 'age', 'sex']);
 const dynamicArray = new DynamicArray<number>(3);
 const vector = new Vector(10).fill(10);
-const map = new ChainedHashMap(3);
+const map = new ChainedHashMap();
 
 
 
