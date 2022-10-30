@@ -4,6 +4,8 @@
 
 - ### [Очередь. На основе связного списка (Queue)](https://github.com/misbiheyv/data-structures/tree/main/src/Queue)
 
+- ### [Очередь с приоритетами (PriorityQueue)](https://github.com/misbiheyv/data-structures/tree/main/src/PriorityQueue)
+
 - ### [Стек. На основе массива фиксированной длины (Stack)](https://github.com/misbiheyv/data-structures/tree/main/src/Stack)
 
 - ### [Дек. На основе двустороннего списка (Deque)](https://github.com/misbiheyv/data-structures/tree/main/src/Deque)
