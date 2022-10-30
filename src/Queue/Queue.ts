@@ -11,7 +11,7 @@ export default class Queue<T> implements AbstractQueue<T> {
         return this.size === 0;
     }
 
-    private store = new LinkedList<T>();
+    protected store = new LinkedList<T>();
 
     public enqueue(data: T): void {
         this.store.insertLast(data);

@@ -248,7 +248,7 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
         }
     }
 
-    private *unsafeItems(reversed?: false): IterableIterator<ListNode<T>> {
+    public *unsafeItems(reversed?: false): IterableIterator<ListNode<T>> {
         let cur = reversed ? this.right : this.left;
 
         while (cur) {
