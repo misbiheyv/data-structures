@@ -13,7 +13,11 @@
 		"strictFunctionTypes": true,
 		"strictPropertyInitialization": true,
 		"strict": true,
-		"noImplicitAny": false
+		"noImplicitAny": false,
+		"paths": {
+			"core/*": ["core/*"],
+			"tests/*": ["tests/*"]
+		}
 	},
-	"include": ["src/**/*", "index.d.ts"]
+	"include": ["src/**/*", "tests/**/*", "index.d.ts"]
 }
