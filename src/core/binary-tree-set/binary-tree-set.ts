@@ -1,9 +1,10 @@
-import { BinaryTree } from "core/binary-tree-set/interface";
-import TreeNode from "core/binary-tree-set/tree-node";
+import { BinaryTree } from 'core/binary-tree-set/interface';
+import TreeNode from 'core/binary-tree-set/tree-node';
 
 export default class BinaryThreeSet<T> implements BinaryTree<T> {
 
   protected root: CanUndef<TreeNode<T>>;
+
   protected count: number = 0;
 
   get length(): number {
@@ -11,12 +12,12 @@ export default class BinaryThreeSet<T> implements BinaryTree<T> {
   }
 
   get getRoot(): CanUndef<TreeNode<T>> {
-    return this.root
+    return this.root;
   }
 
   constructor(iter: Iterable<T>) {
     for (const el of iter) {
-      this.add(el)
+      this.add(el);
     }
   }
 
@@ -24,7 +25,7 @@ export default class BinaryThreeSet<T> implements BinaryTree<T> {
     this.count++;
 
     if (this.root === undefined) {
-      this.root = new TreeNode(value)
+      this.root = new TreeNode(value);
       return;
     }
 
@@ -50,11 +51,12 @@ export default class BinaryThreeSet<T> implements BinaryTree<T> {
   find(value: T): CanUndef<T> {
     let cur = this.root;
 
-    while (cur && cur?.data != value) {
+    while (cur && cur?.data !== value) {
       if (value < cur.data) {
-        cur = cur.left
+        cur = cur.left;
+
       } else {
-        cur = cur.right
+        cur = cur.right;
       }
     }
 
@@ -62,30 +64,31 @@ export default class BinaryThreeSet<T> implements BinaryTree<T> {
   }
 
   delete(value: T): void {
-    //! Недоделан, пока не умеет удалять корневые элементы
+    //TODO: научиться не умеет удалять корневые элементы, проверить баги удаления
 
-    let target = this.root;
-    let parent = this.root;
-    let side: boolean = false;
+    let
+      target = this.root,
+      parent = this.root,
+      side = false;
 
-    while (target && target?.data != value) {
+    while (target && target?.data !== value) {
       parent = target;
 
       if (value < target.data) {
-        side = false
-        target = target.left
+        side = false;
+        target = target.left;
+
       } else {
-        side = true
-        target = target.right
+        side = true;
+        target = target.right;
       }
     }
 
-    this.deleteNode(target, parent, side)
+    this.deleteNode(target, parent, side);
   }
 
-
   [Symbol.iterator](): IterableIterator<CanUndef<T>> {
-    return this.inorder()
+    return this.inorder();
   }
 
   preorder(): IterableIterator<CanUndef<T>> {
@@ -151,7 +154,6 @@ export default class BinaryThreeSet<T> implements BinaryTree<T> {
     return this.infex(this.root);
   }
 
-
   protected *prefix(node: CanUndef<TreeNode<T>>): IterableIterator<T> {
     if (node) {
       yield node.data;
@@ -169,11 +171,11 @@ export default class BinaryThreeSet<T> implements BinaryTree<T> {
   protected *postfix(node: CanUndef<TreeNode<T>>): IterableIterator<T> {
     if (node) {
       if (node.left) {
-        yield* this.postfix(node.left)
+        yield* this.postfix(node.left);
       }
 
       if (node.right) {
-        yield* this.postfix(node.right)
+        yield* this.postfix(node.right);
       }
 
       yield node.data;
@@ -183,22 +185,23 @@ export default class BinaryThreeSet<T> implements BinaryTree<T> {
   protected *infex(node: CanUndef<TreeNode<T>>): IterableIterator<T> {
     if (node) {
       if (node.left) {
-        yield* this.infex(node.left)
+        yield* this.infex(node.left);
       }
 
       yield node.data;
 
       if (node.right) {
-        yield* this.infex(node.right)
+        yield* this.infex(node.right);
       }
     }
   }
 
-
   protected deleteNode(target: CanUndef<TreeNode<T>>, parent: CanUndef<TreeNode<T>>, side: boolean) {
-    //! Не доработан. Например, не умеет удалять коренные элементы, возможна некорректная работа с узлами, имеющими обе ветки
+    //TODO: Например, не умеет удалять коренные элементы, возможна некорректная работа с узлами, имеющими обе ветки
 
-    if (target === undefined) return;
+    if (target === undefined) {
+      return;
+    }
 
     this.count--;
 
@@ -224,7 +227,7 @@ export default class BinaryThreeSet<T> implements BinaryTree<T> {
     let cur = target.right || target.left;
 
     while (cur?.left) {
-      cur = cur?.left
+      cur = cur?.left;
     }
 
     return cur;

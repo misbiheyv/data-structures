@@ -1,4 +1,4 @@
-import { AbstractDynamicArray } from "core/dynamic-array/interface";
+import { AbstractDynamicArray } from 'core/dynamic-array/interface';
 
 export default class Vector<T> implements AbstractDynamicArray<T> {
 
@@ -10,11 +10,9 @@ export default class Vector<T> implements AbstractDynamicArray<T> {
 
   protected store: CanUndef<T>[];
 
-
   get size(): number {
     return this.currentSize;
   }
-
 
   constructor(size: number, k = 2.3) {
     this.k = k;
@@ -22,13 +20,12 @@ export default class Vector<T> implements AbstractDynamicArray<T> {
     this.store = new Array<T>(size);
   }
 
-
   add(data: T): void {
     if (this.currentSize === this.maxSize - 1) {
       const temp = this.store;
       this.maxSize = Math.floor(this.maxSize * this.k);
 
-      this.store = new Array(this.maxSize)
+      this.store = new Array(this.maxSize);
 
       for (let i = 0; i < temp.length; i++) {
         this.store[i] = temp[i];
@@ -39,19 +36,25 @@ export default class Vector<T> implements AbstractDynamicArray<T> {
   }
 
   get(index: number): CanUndef<T> {
-    if (index > this.maxSize) throw new Error('index more than size of Vector.');
+    if (index > this.maxSize) {
+      throw new Error('index more than size of Vector.');
+    }
 
     return this.store[index];
   }
 
   set(index: number, data: T): void {
-    if (index > this.maxSize) throw new Error('index more than size of Vector.');
+    if (index > this.maxSize) {
+      throw new Error('index more than size of Vector.');
+    }
 
     this.store[index] = data;
   }
 
   delete(index: number): void {
-    if (index > this.maxSize) throw new Error('index more than size of Vector.');
+    if (index > this.maxSize) {
+      throw new Error('index more than size of Vector.');
+    }
 
     for (let i = index; i < this.currentSize - 1; i++) {
       this.store[i] = this.store[i + 1];
@@ -64,9 +67,9 @@ export default class Vector<T> implements AbstractDynamicArray<T> {
 
     for (let i = 0; i < this.maxSize; i++) {
       try {
-        this.store[i] = new target()
+        this.store[i] = new target();
       } catch (error) {
-        this.store[i] = target
+        this.store[i] = target;
       }
     }
 
@@ -74,7 +77,6 @@ export default class Vector<T> implements AbstractDynamicArray<T> {
 
     return this;
   }
-
 
   [Symbol.iterator](): IterableIterator<CanUndef<T>> {
     return this.values();

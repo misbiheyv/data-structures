@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface AbstractQueue<T> {
   size: number;
 

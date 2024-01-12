@@ -9,8 +9,13 @@ import type {
 
 } from 'core/linked-list/interface';
 
-
 export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
+
+  protected left?: IListNode<T>;
+
+  protected right?: IListNode<T>;
+
+  protected size = 0;
 
   get first(): CanUndef<IListNode<T>> {
     return this.left;
@@ -24,14 +29,6 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
     return this.size;
   }
 
-
-  protected left?: IListNode<T>;
-
-  protected right?: IListNode<T>;
-
-  protected size = 0;
-
-
   constructor(iterable?: Iterable<T>) {
     if (iterable) {
       for (const el of iterable) {
@@ -39,7 +36,6 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
       }
     }
   }
-
 
   insertFirst(data: T): void {
     if (this.left === undefined) {
@@ -66,7 +62,9 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
   }
 
   deleteFirst(): CanUndef<T> {
-    if (this.size <= 0 || this.left === undefined) throw new Error('List is empty.');
+    if (this.size <= 0 || this.left === undefined) {
+      throw new Error('List is empty.');
+    }
 
     let res;
 
@@ -87,7 +85,9 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
   }
 
   deleteLast(): CanUndef<T> {
-    if (this.size <= 0 || this.right === undefined) throw new Error('List is empty.');
+    if (this.size <= 0 || this.right === undefined) {
+      throw new Error('List is empty.');
+    }
 
     let res;
 
@@ -108,8 +108,9 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
   }
 
   insertAfter(key: T, data: T): boolean {
-    if (this.size <= 0 || this.left === undefined || this.right === undefined)
+    if (this.size <= 0 || this.left === undefined || this.right === undefined) {
       throw new Error('List is empty.');
+    }
 
     if (this.right.data === key) {
       this.insertLast(data);
@@ -131,19 +132,24 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
   }
 
   delete(value: T): CanUndef<T> {
-    if (this.size <= 0 || this.left === undefined || this.right === undefined)
+    if (this.size <= 0 || this.left === undefined || this.right === undefined) {
       throw new Error('List is empty.');
+    }
 
-    if (this.left.data === value) return this.deleteFirst();
+    if (this.left.data === value) {
+      return this.deleteFirst();
+    }
 
-    if (this.right.data === value) return this.deleteLast();
+    if (this.right.data === value) {
+      return this.deleteLast();
+    }
 
     for (const cur of this.unsafeItems()) {
       if (cur.data === value) {
         const res = cur.data;
 
-        cur.prev!.next = cur.next
-        cur.next!.prev = cur.prev
+        cur.prev!.next = cur.next;
+        cur.next!.prev = cur.prev;
         this.size--;
 
         return res;
@@ -152,23 +158,26 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
   }
 
   deleteAll(value: T): boolean {
-    if (this.size <= 0 || this.left === undefined || this.right === undefined)
+    if (this.size <= 0 || this.left === undefined || this.right === undefined) {
       throw new Error('List is empty.');
+    }
 
     let deleteSomeone: boolean = false;
 
     for (const cur of this.unsafeItems()) {
-      if (cur.data !== value) continue;
+      if (cur.data !== value) {
+        continue;
+      }
 
       if (cur.next === undefined) {
-        this.deleteLast()
+        this.deleteLast();
 
       } else if (cur.prev === undefined) {
-        this.deleteFirst()
+        this.deleteFirst();
 
       } else {
-        cur.prev.next = cur.next
-        cur.next.prev = cur.prev
+        cur.prev.next = cur.next;
+        cur.next.prev = cur.prev;
         this.size--;
       }
 
@@ -181,13 +190,13 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
   showList(direction: ListDirection = 'regular'): void {
     if (direction === 'regular') {
       for (const el of this) {
-        console.log(el)
+        console.log(el);
       }
       return;
     }
 
     for (const el of this.valuesReverse()) {
-      console.log(el)
+      console.log(el);
     }
   }
 
@@ -199,7 +208,9 @@ export default class LinkedList<T> implements ILinkedList<T>, Iterable<T> {
 
   has(value: T): boolean {
     for (const el of this) {
-      if (el !== value) continue;
+      if (el !== value) {
+        continue;
+      }
 
       return true;
     }

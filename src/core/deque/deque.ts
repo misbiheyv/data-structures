@@ -1,5 +1,5 @@
-import LinkedList from "core/linked-list";
-import AbstractDeque from "core/deque/interface";
+import LinkedList from 'core/linked-list';
+import AbstractDeque from 'core/deque/interface';
 
 export default class Deque<T> implements AbstractDeque<T> {
   protected store = new LinkedList<T>();
@@ -21,22 +21,34 @@ export default class Deque<T> implements AbstractDeque<T> {
   }
 
   deleteFirst(): CanUndef<T> {
-    if (this.size <= 0) throw new Error('Queue is empty.')
+    if (this.size <= 0) {
+      throw new Error('Queue is empty.');
+    }
+
     return this.store.deleteFirst();
   }
 
   deleteLast(): CanUndef<T> {
-    if (this.size <= 0) throw new Error('Queue is empty.')
+    if (this.size <= 0) {
+      throw new Error('Queue is empty.');
+    }
+
     return this.store.deleteLast();
   }
 
   peekFirst(): CanUndef<T> {
-    if (this.size <= 0) throw new Error('Queue is empty.')
+    if (this.size <= 0) {
+      throw new Error('Queue is empty.');
+    }
+
     return this.store.first ? this.store.first.data : undefined;
   }
 
   peekLast(): CanUndef<T> {
-    if (this.size <= 0) throw new Error('Queue is empty.')
+    if (this.size <= 0) {
+      throw new Error('Queue is empty.');
+    }
+
     return this.store.last ? this.store.last.data : undefined;
   }
 }

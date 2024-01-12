@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface ILinkedList<T> {
 
   first: CanUndef<IListNode<T>>;
@@ -26,15 +27,11 @@ export interface ILinkedList<T> {
   valuesReverse(): IterableIterator<T>;
 }
 
-
 export interface IListNode<T> {
-
   data: T
   next: ListNodePointer<T>
   prev: ListNodePointer<T>
-
 }
-
 
 export interface ListNodeView<T> {
   readonly data: T
@@ -43,6 +40,5 @@ export interface ListNodeView<T> {
 }
 
 export type ListNodePointer<T> = CanUndef<IListNode<T>>;
-
 
 export type ListDirection = 'regular' | 'inverted'

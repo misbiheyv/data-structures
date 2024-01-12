@@ -1,4 +1,5 @@
-import TreeNode from "core/binary-tree-set/tree-node";
+/* eslint-disable no-unused-vars */
+import TreeNode from 'core/binary-tree-set/tree-node';
 
 export interface BinaryTree<T> {
 
@@ -19,5 +20,4 @@ export interface BinaryTree<T> {
   postorder(): IterableIterator<CanUndef<T>>;
 
   inorder(): IterableIterator<CanUndef<T>>;
-
 }

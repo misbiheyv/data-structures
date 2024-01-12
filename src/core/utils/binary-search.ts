@@ -5,9 +5,13 @@ export function binarySearch(target: any, arr: any[], left?: number, right?: num
     pivot = Math.floor((r + l) / 2),
     el = arr[pivot];
 
-  if (target === el) return pivot;
+  if (target === el) {
+    return pivot;
+  }
 
-  if (l === r) return undefined;
+  if (l === r) {
+    return undefined;
+  }
 
   if (target < el) {
     return binarySearch(target, arr, l, pivot);

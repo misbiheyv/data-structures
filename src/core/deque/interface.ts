@@ -1,4 +1,5 @@
-export default interface AbstractDeque<T> {
+/* eslint-disable no-unused-vars */
+interface AbstractDeque<T> {
   size: number;
 
   isEmpty: boolean;
@@ -15,3 +16,5 @@ export default interface AbstractDeque<T> {
 
   peekLast(): CanUndef<T>;
 }
+
+export default AbstractDeque;

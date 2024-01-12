@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface AbstractStack<T> {
   maxSize: number;
 
