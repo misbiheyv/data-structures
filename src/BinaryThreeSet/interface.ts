@@ -1,24 +1,23 @@
-import { CanUndef } from "../interface";
 import ThreeNode from "./ThreeNode";
 
 export interface BinaryThree<T> {
 
-    getRoot: CanUndef<ThreeNode<T>>;
+  getRoot: CanUndef<ThreeNode<T>>;
 
-    length: number;
+  length: number;
 
-    add(data: T): void;
+  add(data: T): void;
 
-    find(data: T): CanUndef<T>;
+  find(data: T): CanUndef<T>;
 
-    delete(data: T): void;
+  delete(data: T): void;
 
-    [Symbol.iterator](): IterableIterator<CanUndef<T>>;
+  [Symbol.iterator](): IterableIterator<CanUndef<T>>;
 
-    preorder(): IterableIterator<CanUndef<T>>;
+  preorder(): IterableIterator<CanUndef<T>>;
 
-    postorder(): IterableIterator<CanUndef<T>>;
+  postorder(): IterableIterator<CanUndef<T>>;
 
-    inorder(): IterableIterator<CanUndef<T>>;
+  inorder(): IterableIterator<CanUndef<T>>;
 
 }

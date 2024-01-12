@@ -2,7 +2,7 @@
 
 ## Хэш таблица. Разрешение коллизий методом цепочек реализуется классом ChainedHashMap, публичный API класса:
 
-### Конструктор 
+### Конструктор
 
 - constructor(size = 1) - опциональный параметр принимает начальный размер таблицы
 
@@ -35,21 +35,20 @@
 ## Пример использования
 
 ```js
-const map = new ChainedHashMap(2)
+const map = new ChainedHashMap(2);
 
-map.set('name', 'Misha')
-map.set('age', 20)
-map.set('job', 'programmer')
+map.set("name", "Misha");
+map.set("age", 20);
+map.set("job", "programmer");
 
-map.get('name') // 'Misha'
-arr.delete('name')
-arr.has('name') // false
-
+map.get("name"); // 'Misha'
+arr.delete("name");
+arr.has("name"); // false
 
 for (const [k, v] of arr) {
-    // ['name', 'Misha']
-    // ['job', 'programmer']
-    // ['age', 20]
-    console.log(el)
+	// ['name', 'Misha']
+	// ['job', 'programmer']
+	// ['age', 20]
+	console.log(el);
 }
 ```

@@ -2,7 +2,7 @@
 
 Список реализуется классом LinkedList, публичный API класса:
 
-### Конструктор 
+### Конструктор
 
 - constructor(iterable) - может принимать итерируемую коллекцию
 
@@ -42,25 +42,25 @@
 ## Пример использования
 
 ```js
-const list = new LinkedList([1, 2, 3])
+const list = new LinkedList([1, 2, 3]);
 
-list.insertFirst(0)
+list.insertFirst(0);
 
-list.insertLast(4)
+list.insertLast(4);
 
-list.has(3)
+list.has(3);
 
 for (const el of list) {
-    console.log(el) // 0, 1, 2, 3, 4
+	console.log(el); // 0, 1, 2, 3, 4
 }
 
 for (const el of list.items()) {
-    /** 
-      {prev: undefined, next: Node, data: 0}, 
-      {prev: Node, next: Node, data: 1}, 
-      ...,
-      {prev: Node, next: undefined, data: 4}, 
-    */
-    console.log(el) 
+	/** 
+    {prev: undefined, next: Node, data: 0}, 
+    {prev: Node, next: Node, data: 1}, 
+    ...,
+    {prev: Node, next: undefined, data: 4}, 
+  */
+	console.log(el);
 }
 ```

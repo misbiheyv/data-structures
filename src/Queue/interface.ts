@@ -1,13 +1,11 @@
-import { CanUndef } from "../interface";
-
 export interface AbstractQueue<T> {
-    size: number;
+  size: number;
 
-    isEmpty: boolean;
+  isEmpty: boolean;
 
-    enqueue(data: T): void;
+  enqueue(data: T): void;
 
-    dequeue(): CanUndef<T>;
+  dequeue(): CanUndef<T>;
 
-    peek(): CanUndef<T>;
+  peek(): CanUndef<T>;
 }

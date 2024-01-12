@@ -2,7 +2,7 @@
 
 ## <a name="array">Динамический массив реализуется классом DynamicArray, публичный API класса:</a>
 
-### Конструктор 
+### Конструктор
 
 - constructor(arraySize) - принимает максимальный размер массива в списке
 
@@ -31,32 +31,30 @@
 ## Пример использования
 
 ```js
-const arr = new DynamicArray(2)
+const arr = new DynamicArray(2);
 
-arr.add(1)
-arr.add(2)
-arr.add(3)
-arr.add(4)
+arr.add(1);
+arr.add(2);
+arr.add(3);
+arr.add(4);
 
-arr.get(0) // 1
-arr.get(3) // 4
+arr.get(0); // 1
+arr.get(3); // 4
 
-arr.set(2, 10)
-arr.delete(0)
+arr.set(2, 10);
+arr.delete(0);
 
-arr.get(1) // 10
-arr.size // 3
-
+arr.get(1); // 10
+arr.size; // 3
 
 for (const el of arr) {
-    console.log(el) // 2, 10, 4
+	console.log(el); // 2, 10, 4
 }
 ```
 
-
 ## <a name="vector">Вектор реализуется классом Vector, публичный API класса:</a>
 
-### Конструктор 
+### Конструктор
 
 - constructor(arraySize, k = 2.3) - принимает начальный размер массива и опциональный параметр коэффициента расширения (как рекомендуемый установлен 2.3)
 
@@ -87,21 +85,21 @@ for (const el of arr) {
 ## Пример использования
 
 ```js
-const vector = new Vector(4).fill(1)
+const vector = new Vector(4).fill(1);
 
-vector.add(4)
+vector.add(4);
 
-vector.get(0) // 1
-vector.get(2) // 1
-vector.get(3) // 4
+vector.get(0); // 1
+vector.get(2); // 1
+vector.get(3); // 4
 
-vector.set(2, 10)
-arr.delete(0)
+vector.set(2, 10);
+arr.delete(0);
 
-arr.get(1) // 10
-arr.size // 3
+arr.get(1); // 10
+arr.size; // 3
 
 for (const el of arr) {
-    console.log(el) // 2, 10, 4
+	console.log(el); // 2, 10, 4
 }
 ```

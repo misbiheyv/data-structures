@@ -1,18 +1,19 @@
 {
-    "compilerOptions": {
-        "noImplicitAny": true,
-        "strict": true,
-        "module": "es6",
-        "target": "es6",
-        "moduleResolution": "node",
-        "outDir": "dist",
-    },
-    "include": [
-        "src"
-    ],
-    "exclude" : [
-        "dist",
-        "node_modules",
-        "package.json"
-    ]
+	"files": ["src/index.ts"],
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"target": "esnext",
+		"downlevelIteration": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"allowJs": true,
+		"importHelpers": true,
+		"lib": ["dom", "esnext"],
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictPropertyInitialization": true,
+		"strict": true,
+		"noImplicitAny": false
+	},
+	"include": ["src/**/*", "index.d.ts"]
 }

@@ -1,15 +1,13 @@
-import { CanUndef } from "../interface";
-
 export interface AbstractStack<T> {
-    maxSize: number;
+  maxSize: number;
 
-    elementsCount: number;
+  elementsCount: number;
 
-    push(data: T): void;
+  push(data: T): void;
 
-    pop(): CanUndef<T>;
+  pop(): CanUndef<T>;
 
-    peek(): CanUndef<T>;
+  peek(): CanUndef<T>;
 
-    clear(): void;
+  clear(): void;
 }

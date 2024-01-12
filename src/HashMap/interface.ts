@@ -1,26 +1,24 @@
-import { CanUndef } from "../interface";
-
 export interface HashTable<K extends Stringifiable, V> {
 
-    size: number;
+  size: number;
 
-    get(key: K): CanUndef<V>;
+  get(key: K): CanUndef<V>;
 
-    set(key: K, data: V): void;
+  set(key: K, data: V): void;
 
-    delete(key: K): void;
+  delete(key: K): void;
 
-    has(key: K): boolean;
+  has(key: K): boolean;
 
-    clear(): void;
+  clear(): void;
 
-    [Symbol.iterator](): IterableIterator<[K, V]>
+  [Symbol.iterator](): IterableIterator<[K, V]>
 
-    entries(): IterableIterator<[K, V]>;
+  entries(): IterableIterator<[K, V]>;
 
-    values(): IterableIterator<V>;
+  values(): IterableIterator<V>;
 
-    keys(): IterableIterator<K>;
+  keys(): IterableIterator<K>;
 }
 
 export type Stringifiable = { toString(): string }

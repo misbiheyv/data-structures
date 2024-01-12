@@ -1,53 +1,52 @@
-import { CanUndef } from "../interface";
 import { AbstractStack } from './interface'
 
 export default class Stack<T> implements AbstractStack<T> {
-    public get maxSize() : number {
-        return this._size;
-    }
+  get maxSize(): number {
+    return this._size;
+  }
 
-    public get elementsCount() : number {
-        return this._elementsCount > this.maxSize ? this.maxSize : this._elementsCount;
-    }
+  get elementsCount(): number {
+    return this._elementsCount > this.maxSize ? this.maxSize : this._elementsCount;
+  }
 
-    private set elementsCount(v: number) {
-        this._elementsCount = v;
-    }
-
-
-    private store: Array<T>;
-
-    protected _size: number;
-    
-    protected _elementsCount: number = 0;
+  protected set elementsCount(v: number) {
+    this._elementsCount = v;
+  }
 
 
-    constructor(size: number) {
-        this.store = new Array(size);
-        this._size = size;
-    }
+  protected store: Array<T>;
+
+  protected _size: number;
+
+  protected _elementsCount: number = 0;
 
 
-    public push(data: T): void {
-        if (this.elementsCount >= this.maxSize) throw new Error('Stack is full already.')
+  constructor(size: number) {
+    this.store = new Array(size);
+    this._size = size;
+  }
 
-        this.store[this.elementsCount++] = data;
-    }
 
-    public pop(): CanUndef<T> {
-        if (this.elementsCount <= 0) throw new Error('Stack is empty.');
-        return this.store[--this.elementsCount];
-    }
+  push(data: T): void {
+    if (this.elementsCount >= this.maxSize) throw new Error('Stack is full already.')
 
-    public peek(): CanUndef<T> {
-        if (this.elementsCount <= 0) throw new Error('Stack is empty.')
+    this.store[this.elementsCount++] = data;
+  }
 
-        return this.store[this.elementsCount - 1]
-    }
+  pop(): CanUndef<T> {
+    if (this.elementsCount <= 0) throw new Error('Stack is empty.');
+    return this.store[--this.elementsCount];
+  }
 
-    public clear(): void {
-        this.store = new Array(this.maxSize);
-        this.elementsCount = 0;
-    }
+  peek(): CanUndef<T> {
+    if (this.elementsCount <= 0) throw new Error('Stack is empty.')
+
+    return this.store[this.elementsCount - 1]
+  }
+
+  clear(): void {
+    this.store = new Array(this.maxSize);
+    this.elementsCount = 0;
+  }
 
 }

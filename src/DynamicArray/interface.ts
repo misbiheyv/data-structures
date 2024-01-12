@@ -1,17 +1,15 @@
-import type { CanUndef } from "../interface";
-
 export interface AbstractDynamicArray<T> {
-    size: number;
+  size: number;
 
-    get(index: number): CanUndef<T>;
+  get(index: number): CanUndef<T>;
 
-    set(index: number, data: T): void;
+  set(index: number, data: T): void;
 
-    add(data: T): void;
+  add(data: T): void;
 
-    delete(index: number): void;
+  delete(index: number): void;
 
-    values(): IterableIterator<CanUndef<T>>;
+  values(): IterableIterator<CanUndef<T>>;
 
-    entries(): IterableIterator<[number, CanUndef<T>]>;
+  entries(): IterableIterator<[number, CanUndef<T>]>;
 }

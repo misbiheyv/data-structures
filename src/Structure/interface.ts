@@ -1,5 +1,5 @@
 export interface AbstractStructure<T> {
-    set(key: string, value: T): void;
+  set(key: string, value: T): void;
 
-    get(key: string): T;
+  get(key: string): T;
 }

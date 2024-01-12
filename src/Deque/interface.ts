@@ -1,19 +1,17 @@
-import { CanUndef } from "../interface";
-
 export default interface AbstractDeque<T> {
-    size: number;
+  size: number;
 
-    isEmpty: boolean;
+  isEmpty: boolean;
 
-    append(data: T): void;
+  append(data: T): void;
 
-    prepend(data: T): void;
+  prepend(data: T): void;
 
-    deleteFirst(): CanUndef<T>;
+  deleteFirst(): CanUndef<T>;
 
-    deleteLast(): CanUndef<T>;
+  deleteLast(): CanUndef<T>;
 
-    peekFirst(): CanUndef<T>;
+  peekFirst(): CanUndef<T>;
 
-    peekLast(): CanUndef<T>;
+  peekLast(): CanUndef<T>;
 }

@@ -2,7 +2,7 @@
 
 ## Сет реализуется классом BinaryThreeSet, публичный API класса:
 
-### Конструктор 
+### Конструктор
 
 - constructor(iterable) - принимает итерируемую структуру
 
@@ -33,20 +33,19 @@
 ```js
 const set = new BinaryThreeSet([2, 1, 5, 3, 6]);
 
-for(el of set) {
-    console.log(el) // [1, 2, 3, 5, 6]
+for (el of set) {
+	console.log(el); // [1, 2, 3, 5, 6]
 }
 
-for(el of set.postorder()) {
-    console.log(el) // [1, 3, 6, 5, 2]
+for (el of set.postorder()) {
+	console.log(el); // [1, 3, 6, 5, 2]
 }
 
-for(el of set.preorder()) {
-    console.log(el) // [2, 1, 5, 3, 6]
+for (el of set.preorder()) {
+	console.log(el); // [2, 1, 5, 3, 6]
 }
 
-set.add(4)
-set.get(2) // 2
-set.delete(3)
-
+set.add(4);
+set.get(2); // 2
+set.delete(3);
 ```

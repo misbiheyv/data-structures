@@ -15,13 +15,13 @@ Compile-time структура реализуется классом Structure,
 ## Пример использования
 
 ```js
-const struct = new Structure(['name', 'age', 'sex'])
+const struct = new Structure(["name", "age", "sex"]);
 
-struct.set('name', 'Misha')
-struct.set('age', 20)
-struct.set('sex', 'male')
+struct.set("name", "Misha");
+struct.set("age", 20);
+struct.set("sex", "male");
 
-struct.get('name') // 'Misha'
-struct.get('age') // 20
-struct.get('sex') // 'male'
+struct.get("name"); // 'Misha'
+struct.get("age"); // 20
+struct.get("sex"); // 'male'
 ```

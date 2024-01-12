@@ -19,17 +19,16 @@
 ## Пример использования
 
 ```js
-const queue = new Queue()
+const queue = new Queue();
 
-queue.enqueue(1)
-queue.enqueue(2)
-queue.enqueue(3)
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
 
-queue.dequeue() // 1
-queue.enqueue() // 2
+queue.dequeue(); // 1
+queue.enqueue(); // 2
 
-queue.peek() // 3
-queue.peek() // 3
-queue.peek() // 3
-
+queue.peek(); // 3
+queue.peek(); // 3
+queue.peek(); // 3
 ```

@@ -1,9 +1,35 @@
 {
-	"type": "module",
+	"name": "data-structures",
+	"version": "1.0.0",
+	"description": "Basic Data Structures",
+	"main": "./dist/cjs/index.js",
+	"module": "./dist/esm/index.js",
+	"types": "./dist/types/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/types/index.d.ts",
+			"require": "./dist/cjs/index.js",
+			"import": "./dist/esm/index.js",
+			"default": "./dist/esm/index.js"
+		},
+		"./package.json": "./package.json"
+	},
 	"scripts": {
-		"test": "jest",
-		"build": "tsc",
-		"serve": "tsc && cd dist && node --es-module-specifier-resolution=node index.js"
+		"test": "npm run build && jest",
+		"build:clear": "rm -rf dist",
+		"build": "npm run build:clear && tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
+		"watch": "npm run build:clear && tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json --watch"
+	},
+	"author": {
+		"name": "misbiheyv",
+		"email": "mishagorkovenko1103@gmail.com"
+	},
+	"files": [
+		"dist",
+		"index.d.ts"
+	],
+	"peerDependencies": {
+		"tslib": "^2.6.1"
 	},
 	"devDependencies": {
 		"@types/jest": "^29.1.2",
@@ -13,17 +39,10 @@
 	},
 	"jest": {
 		"transform": {
-			"^.+\\.tsx?$": "ts-jest"
+			"^.+\\.ts$": "ts-jest"
 		},
-		"testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
-		"moduleFileExtensions": [
-			"ts",
-			"tsx",
-			"js",
-			"jsx",
-			"json",
-			"node"
-		],
+		"testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
+		"moduleFileExtensions": ["ts", "js"],
 		"collectCoverageFrom": [
 			"./src/**/*.ts"
 		]

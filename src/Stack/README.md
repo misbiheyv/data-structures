@@ -25,19 +25,19 @@
 ## Пример использования
 
 ```js
-const stack = new Stack(4)
+const stack = new Stack(4);
 
-stack.push(1)
-stack.push(2)
-stack.push(3)
-stack.push(4)
+stack.push(1);
+stack.push(2);
+stack.push(3);
+stack.push(4);
 
-stack.pop() // 4
-stack.pop() // 3
+stack.pop(); // 4
+stack.pop(); // 3
 
-stack.peek() // 2
-stack.peek() // 2
-stack.peek() // 2
+stack.peek(); // 2
+stack.peek(); // 2
+stack.peek(); // 2
 
-stack.clear()
+stack.clear();
 ```

@@ -1,17 +1,17 @@
 export default class ThreeNode<T> {
 
-    left?: ThreeNode<T>
+  left?: ThreeNode<T>
 
-    right?: ThreeNode<T>
+  right?: ThreeNode<T>
 
-    data: T
+  data: T
 
-    constructor(data: T, left?: ThreeNode<T>, right?: ThreeNode<T>) {
-        this.data = data;
+  constructor(data: T, left?: ThreeNode<T>, right?: ThreeNode<T>) {
+    this.data = data;
 
 
-        this.left = left;
+    this.left = left;
 
-        this.right = right;
-    }
+    this.right = right;
+  }
 }

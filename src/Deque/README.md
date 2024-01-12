@@ -25,24 +25,24 @@
 ## Пример использования
 
 ```js
-const deque = new Deque()
+const deque = new Deque();
 
-deque.isEmpty // true
+deque.isEmpty; // true
 
-deque.append(2)
-deque.prepend(1)
-deque.append(3)
-deque.prepend(0)
+deque.append(2);
+deque.prepend(1);
+deque.append(3);
+deque.prepend(0);
 
-deque.peekFirst() // 0
-deque.peekLast() // 3
+deque.peekFirst(); // 0
+deque.peekLast(); // 3
 
-deque.deleteFirst() // 0
-deque.deleteLast() // 3
+deque.deleteFirst(); // 0
+deque.deleteLast(); // 3
 
-deque.peekFirst() // 1
-deque.peekLast() // 2
+deque.peekFirst(); // 1
+deque.peekLast(); // 2
 
-deque.size // 2
-deque.isEmpty // false
+deque.size; // 2
+deque.isEmpty; // false
 ```
